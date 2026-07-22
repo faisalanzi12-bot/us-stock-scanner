@@ -25,7 +25,7 @@ def main() -> None:
     scorer = SignalScorer(settings)
     scanner = StockScanner(provider, scorer, store, settings)
     telegram = TelegramSender(secrets.telegram_bot_token, secrets.telegram_chat_id)
-
+telegram.send_message("✅ اختبار: US Stock Scanner يعمل بنجاح")
     signals, state = scanner.run()
     logger.info("Found %d qualifying signals", len(signals))
     for signal in signals:
