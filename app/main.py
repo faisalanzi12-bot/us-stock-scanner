@@ -21,11 +21,11 @@ def main() -> None:
     provider = FinnhubProvider(
         secrets.finnhub_api_key,
         request_delay=float(settings["scanner"]["request_delay_seconds"]),
-    )
+    
     scorer = SignalScorer(settings)
     scanner = StockScanner(provider, scorer, store, settings)
-    telegram = TelegramSender(secrets.telegram_bot_token, secrets.telegram_chat_id)
-
+telegram = TelegramSender(secrets.telegram_bot_token, secrets.telegram_chat_id)
+telegram.send("✅ اختبار: US Stock Scanner مربوط بتيليجرام ويعمل")
     signals, state = scanner.run()
     logger.info("Found %d qualifying signals", len(signals))
     for signal in signals:
